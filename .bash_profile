@@ -18,6 +18,34 @@ function GITBRANCH {
 	git branch | grep ^\* | sed s"/^\* //";
     fi
 }
+function set_color_prompt {
+    LOCAL_QM=${?};
+    VENV='virt';
+    if [ -n "$VIRTUAL_ENV" ]
+    then
+     	VENV="(`basename \"$VIRTUAL_ENV\"`) ";
+    else
+     	VENV='';
+    fi
+    if [  ${LOCAL_QM} -eq 0 ]
+    then
+	PS1='${VENV}\033[1;32m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;31m:\033[0m$\n';
+    else
+	PS1='${VENV}\033[1;31m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n';
+    fi
+    echo -ne "\033];${HOSTNAME%%.int.lineratesystems.com}\007";
+    export PS1;
+    if [[ '/build/haiti/jwilcox/lrs_release_venv' == ${VIRTUAL_ENV} ]]
+    then
+	export PYTHONPATH=${HOME}/tlc/tlc_client/tlc_client_base:/tools/lib:/tools/bin:${HOME}/build/lrs_release_venv/lrs_release/core2/test/robot/lib
+    else
+	export PYTHONPATH=/tools/lib:/tools/bin:${HOME}/build/lrs_release/core2/test/robot/lib
+    fi
+}
+
+
+export PROMPT_COMMAND=set_color_prompt
+
 export PS1='\033[1;31m${?} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n'
 if [ -f ${HOME}/.bash_completion.d/git ]; then
     . ${HOME}/.bash_completion.d/git
@@ -48,28 +76,8 @@ umask 002
 
 export PYTHONDONTWRITEBYTECODE=1
 export PATH=/tools/bin:$PATH
-#export PYTHONPATH=/tools/lib:/tools/bin:/home/jwilcox/build/lrs_release/core2/test/robot/lib
+
 export PYTHONPATH=$(${HOME}/python_path_setter.py)
 
 alias emacs="emacs -nw"
 alias grep="grep --color"
-
-function set_color_prompt {
-    LOCAL_QM=${?};
-    VENV='virt';
-    if [ -n "$VIRTUAL_ENV" ]
-    then
-     	VENV="(`basename \"$VIRTUAL_ENV\"`) ";
-    else
-     	VENV='';
-    fi
-    if [  ${LOCAL_QM} -eq 0 ]
-    then
-	PS1='${VENV}\033[1;32m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;31m:\033[0m$\n';
-    else
-	PS1='${VENV}\033[1;31m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n';
-    fi
-    echo -ne "\033];${HOSTNAME%%.int.lineratesystems.com}\007";
-    export PS1;
-}
-export PROMPT_COMMAND=set_color_prompt
