@@ -77,7 +77,5 @@ umask 002
 export PYTHONDONTWRITEBYTECODE=1
 export PATH=/tools/bin:$PATH
 
-export PYTHONPATH=$(${HOME}/python_path_setter.py)
-
 alias emacs="emacs -nw"
 alias grep="grep --color"
