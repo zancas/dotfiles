@@ -51,31 +51,15 @@ if [ -f ${HOME}/.bash_completion.d/git ]; then
     . ${HOME}/.bash_completion.d/git
 fi
 
-function gitfetchcheckoutreset() {
-    git fetch --all;
-    git checkout $1;
-    git reset --hard origin/$1;
+function gitfeatureonrelease() {
+    git fetch --all &&\
+    git checkout $2 &&\
+    git merge --ff-only origin/$2 &&\
+    git checkout $1 &&\
+    git rebase $2
 }
 
-## aliases
-alias a='ls -lrtca'
-alias l='ls -lrtc'
-#function "d" lists _all_ directories in "." or ${*} if parameters are passed in order from least to most recent
-function d {
-   OIFS=${IFS};
-   IFS=" ";
-   if [[ ${*} = '' ]]
-   then
-     ls -ldtr * | grep ^d;
-   else
-     ls -ldtr ${*}/* | grep ^d;
-   fi
-   export IFS=${OIFS}
-}
 umask 002
 
 export PYTHONDONTWRITEBYTECODE=1
-export PATH=/tools/bin:$PATH
-
-alias emacs="emacs -nw"
 alias grep="grep --color"
