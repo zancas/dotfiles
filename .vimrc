@@ -5,3 +5,5 @@ set expandtab
 set laststatus=2
 set number
 syntax on
+set wildmode=longest,list,full
+set wildmenu
