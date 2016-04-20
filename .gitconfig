@@ -3,6 +3,6 @@
 	name = Za Wilgustus
 	email = za@F5.com
 [alias]
-	lol = log --graph --decorate --oneline
+	lol = log --graph --decorate --oneline --color
 [commit]
 	template = ~/dotfiles/.git-commit-template.txt
