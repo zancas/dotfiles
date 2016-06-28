@@ -10,3 +10,4 @@ set wildmenu
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 set statusline+=%F
+set noswapfile
