@@ -51,7 +51,7 @@ if [ -f ${HOME}/.bash_completion.d/git ]; then
     . ${HOME}/.bash_completion.d/git
 fi
 
-function gitfeatureonrelease() {
+function gitfor() {
     git fetch --all &&\
     git checkout $2 &&\
     git merge --ff-only origin/$2 &&\
