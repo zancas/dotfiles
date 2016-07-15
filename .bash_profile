@@ -52,11 +52,12 @@ if [ -f ${HOME}/.bash_completion.d/git ]; then
 fi
 
 function gitfor() {
-    git fetch --all &&\
-    git checkout $2 &&\
-    git merge --ff-only origin/$2 &&\
+    STARTBRANCH=`git branch | grep -e"^* " | sed s"/^* //"`
+    git fetch --verbose --all &&\
     git checkout $1 &&\
-    git rebase $2
+    git merge --verbose --ff-only origin/$1 &&\
+    git checkout $STARTBRANCH &&\
+    git rebase --verbose $1
 }
 
 umask 002
