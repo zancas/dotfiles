@@ -54,10 +54,8 @@ fi
 function gitfor() {
     STARTBRANCH=`git branch | grep -e"^* " | sed s"/^* //"`
     git fetch --verbose --all &&\
-    git checkout $1 &&\
-    git merge --verbose --ff-only origin/$1 &&\
-    git checkout $STARTBRANCH &&\
-    git rebase --verbose $1
+    git merge --verbose --ff-only origin/$STARTBRANCH &&\
+    git rebase --verbose origin/$STARTBRANCH
 }
 
 umask 002
