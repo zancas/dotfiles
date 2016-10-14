@@ -19,37 +19,17 @@ function GITBRANCH {
     fi
 }
 function set_color_prompt {
-    LOCAL_QM=${?};
-    VENV='virt';
-    if [ -n "$VIRTUAL_ENV" ]
+    RC=${?};
+    if [  ${RC} -eq 0 ]
     then
-     	VENV="(`basename \"$VIRTUAL_ENV\"`) ";
+	PS1='\033[1;34m`hostname`\033[0m\033[1;32m ${RC} $(GITBRANCH)\n${PWD}\033[0m \033[1;31m:\033[0m$\n';
     else
-     	VENV='';
+	PS1='\033[1;34m`hostname`\033[0m\033[1;32m ${RC} $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n';
     fi
-    if [  ${LOCAL_QM} -eq 0 ]
-    then
-	PS1='${VENV}\033[1;32m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;31m:\033[0m$\n';
-    else
-	PS1='${VENV}\033[1;31m${LOCAL_QM} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n';
-    fi
-    echo -ne "\033];${HOSTNAME%%.int.lineratesystems.com}\007";
     export PS1;
-    if [[ '/build/haiti/jwilcox/lrs_release_venv' == ${VIRTUAL_ENV} ]]
-    then
-	export PYTHONPATH=${HOME}/tlc/tlc_client/tlc_client_base:/tools/lib:/tools/bin:${HOME}/build/lrs_release_venv/lrs_release/core2/test/robot/lib
-    else
-	export PYTHONPATH=/tools/lib:/tools/bin:${HOME}/build/lrs_release/core2/test/robot/lib
-    fi
 }
 
-
 export PROMPT_COMMAND=set_color_prompt
-
-export PS1='\033[1;31m${?} b: $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n'
-if [ -f ${HOME}/.bash_completion.d/git ]; then
-    . ${HOME}/.bash_completion.d/git
-fi
 
 function gitfor() {
     STARTBRANCH=`git branch | grep -e"^* " | sed s"/^* //"`
