@@ -1,7 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
-#export TERM=vt100
 # If not running interactively, don't do anything:
 [ -z "$PS1" ] && return
 
@@ -20,25 +19,17 @@ function GITBRANCH {
 }
 function set_color_prompt {
     RC=${?};
+    LINE1='HOST: \033[1;34m`hostname` \033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
-	PS1='\033[1;34m`hostname`\033[0m\033[1;32m ${RC} $(GITBRANCH)\n${PWD}\033[0m \033[1;31m:\033[0m$\n';
+        LINE2='\033[1;32m${PWD}\033[0m \033[1;31m: ${RC} \033[0m$'
     else
-	PS1='\033[1;34m`hostname`\033[0m\033[1;32m ${RC} $(GITBRANCH)\n${PWD}\033[0m \033[1;32m:\033[0m$\n';
+	    LINE2='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
-    export PS1;
+    PS1=$LINE1'\n'$LINE2'\n'
 }
 
 export PROMPT_COMMAND=set_color_prompt
-
-function gitfor() {
-    STARTBRANCH=`git branch | grep -e"^* " | sed s"/^* //"`
-    git fetch --verbose --all &&\
-    git merge --verbose --ff-only origin/$STARTBRANCH &&\
-    git rebase --verbose origin/$STARTBRANCH
-}
-
-umask 002
 
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
