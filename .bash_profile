@@ -1,4 +1,3 @@
-echo "****************"
 if [ -n "$TMUX" ] && [ -n "$SESSION_LINK" ];
     then
     export SSH_AUTH_SOCK=$SESSION_LINK
@@ -29,7 +28,7 @@ function set_color_prompt {
     then
         LINE2='\033[1;32m${PWD}\033[0m RC\033[1;31m: ${RC} \033[0m$'
     else
-	    LINE2='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
+        LINE2='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
     PS1=$LINE1'\n'$LINE2'\n'
 }
