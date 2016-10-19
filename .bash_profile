@@ -23,6 +23,7 @@ function GITBRANCH {
 }
 function set_color_prompt {
     RC=$?;
+    LINE0="`date` ||"
     LINE1='USER: \033[1;34m`whoami`\033[0m HOST: \033[1;34m`hostname`\033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
@@ -30,7 +31,7 @@ function set_color_prompt {
     else
         LINE2='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
-    PS1=$LINE1'\n'$LINE2'\n'
+    PS1=$LINE0' '$LINE1'\n'$LINE2'\n'
 }
 export PROMPT_COMMAND=set_color_prompt
 
