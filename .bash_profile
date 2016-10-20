@@ -21,17 +21,30 @@ function GITBRANCH {
 	git branch | grep ^\* | sed s"/^\* //";
     fi
 }
+function ssh_key_fps_and_fns {
+    KEYFNAMES=''
+    for FNAME in `ssh-add -l | cut -d ' ' -f 3`;
+    do
+        KEYFNAMES=$KEYFNAMES' '${FNAME##*/}
+    done
+    echo $KEYFNAMES
+}
+
+
 function set_color_prompt {
     RC=$?;
-    LINE0="`date` ||"
-    LINE1='USER: \033[1;34m`whoami`\033[0m HOST: \033[1;34m`hostname`\033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
+    DATE="`date` ||"
+    USERHOSTBRANCH='USER: \033[1;34m`whoami`\033[0m HOST: \033[1;34m`hostname`\033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
-        LINE2='\033[1;32m${PWD}\033[0m RC\033[1;31m: ${RC} \033[0m$'
+        PWDRC='\033[1;32m${PWD}\033[0m RC\033[1;31m: ${RC} \033[0m$'
     else
-        LINE2='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
+        PWDRC='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
-    PS1=$LINE0' '$LINE1'\n'$LINE2'\n'
+    LINE0=$DATE' '$USERHOSTBRANCH'\n'
+    LINE1=$(ssh_key_fps_and_fns)'\n'
+    LINE2=$PWDRC'\n'
+    PS1=$LINE0$LINE1$LINE2
 }
 export PROMPT_COMMAND=set_color_prompt
 
