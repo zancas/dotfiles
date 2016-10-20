@@ -33,7 +33,7 @@ function ssh_key_fps_and_fns {
 
 function set_color_prompt {
     RC=$?;
-    DATE="`date` ||"
+    DATE="\033[1;36m`date` \033[0m||"
     USERHOSTBRANCH='USER: \033[1;34m`whoami`\033[0m HOST: \033[1;34m`hostname`\033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
