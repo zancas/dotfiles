@@ -18,7 +18,12 @@ function GITBRANCH {
     then
 	echo No git repo
     else
-	git branch | grep ^\* | sed s"/^\* //";
+    STATUS=''
+    for S in `git status -s | cut -c 1-3`;
+    do
+        STATUS=$STATUS$S
+    done
+	echo `git branch | grep ^\* | sed s"/^\* //"`': '$STATUS
     fi
 }
 function ssh_key_fps_and_fns {
@@ -34,10 +39,10 @@ function ssh_key_fps_and_fns {
 function set_color_prompt {
     RC=$?;
     DATE="\033[1;36m`date` \033[0m||"
-    USERHOSTBRANCH='USER: \033[1;34m`whoami`\033[0m HOST: \033[1;34m`hostname`\033[0m BRANCH: \033[1;35m$(GITBRANCH)\033[0m'
+    USERHOSTBRANCH='\033[1;34m`hostname`\033[0m \033[1;34m`whoami`\033[0m \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
-        PWDRC='\033[1;32m${PWD}\033[0m RC\033[1;31m: ${RC} \033[0m$'
+        PWDRC='\033[1;32m${PWD}\033[0m\033[1;31m: ${RC} \033[0m$'
     else
         PWDRC='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
