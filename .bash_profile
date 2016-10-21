@@ -27,12 +27,17 @@ function GITBRANCH {
     fi
 }
 function ssh_key_fps_and_fns {
-    KEYFNAMES=''
-    for FNAME in `ssh-add -l | cut -d ' ' -f 3`;
-    do
-        KEYFNAMES=$KEYFNAMES' '${FNAME##*/}
-    done
-    echo $KEYFNAMES
+    if [[ `ssh-add 2>&1` == *"Could not open a connection to your authentication agent."* ]]
+    then
+        echo No ssh-agent
+    else
+        KEYFNAMES=''
+        for FNAME in `ssh-add -l | cut -d ' ' -f 3`;
+        do
+            KEYFNAMES=$KEYFNAMES' '${FNAME##*/}
+        done
+        echo $KEYFNAMES
+    fi
 }
 
 
