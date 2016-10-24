@@ -16,18 +16,18 @@ shopt -s checkwinsize
 function GITBRANCH {
     if [[ `git branch 2>&1` == *"Not a git repository"* ]]
     then
-	echo No git repo
+	    echo No git repo
     else
-    STATUS=''
-    for S in `git status -s | cut -c 1-3`;
-    do
-        STATUS=$STATUS$S
-    done
-	echo `git branch | grep ^\* | sed s"/^\* //"`': '$STATUS
+        STATUS=''
+        for S in `git status -s | cut -c 1-3`;
+        do
+            STATUS=$STATUS$S
+        done
+	    echo `git branch | grep ^\* | sed s"/^\* //"`': '$STATUS
     fi
 }
 function ssh_key_fps_and_fns {
-    if [[ `ssh-add 2>&1` == *"Could not open a connection to your authentication agent."* ]]
+    if [[ `ssh-add 2>&1` == *"Could not open a connection"* ]]
     then
         echo No ssh-agent
     else
