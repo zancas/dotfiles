@@ -18,12 +18,13 @@ function GITBRANCH {
     then
 	    echo No git repo
     else
-        STATUS=''
-        for S in `git status -s | cut -c 1-3`;
-        do
-            STATUS=$STATUS$S
-        done
-	    echo `git branch | grep ^\* | sed s"/^\* //"`': '$STATUS
+    STATUS='[ '
+    for S in `git status -s | cut -c 1-3`;
+    do
+        STATUS=$STATUS$S' '
+    done
+    STATUS=$STATUS']'
+	echo `git branch | grep ^\* | sed s"/^\* //"`$STATUS
     fi
 }
 function ssh_key_fps_and_fns {
