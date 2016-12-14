@@ -18,13 +18,15 @@ function GITBRANCH {
     then
 	    echo No git repo
     else
-    STATUS=''
-    for S in \'`git status -s | cut -c 1-2`\';
+    STATUS='[ '
+    set -f
+    for S in `git status -s | cut -c 1-2`;
     do
         STATUS=${STATUS}${S}' '
     done
     BRANCH=`git branch | grep ^\* | sed s"/^\* //"`
-	echo ${BRANCH}${STATUS//\'/:}
+	echo ${BRANCH}${STATUS}']'
+    unset -f
     fi
 }
 function ssh_key_fps_and_fns {
@@ -61,3 +63,4 @@ export PROMPT_COMMAND=set_color_prompt
 
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
+#source ~/.containenv/.loginrc
