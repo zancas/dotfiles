@@ -55,12 +55,16 @@ function set_color_prompt {
         PWDRC='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
     LINE0=$DATE' '$USERHOSTBRANCH'\n'
-    LINE1=$(ssh_key_fps_and_fns)'\n'
+    #LINE1=$(ssh_key_fps_and_fns)'\n'
     LINE2=$PWDRC'\n'
-    PS1=$LINE0$LINE1$LINE2
+    PS1=$LINE0$LINE2 #$LINE2
 }
 export PROMPT_COMMAND=set_color_prompt
 
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
 #source ~/.containenv/.loginrc
+
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    exec startx
+fi
