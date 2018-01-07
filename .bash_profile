@@ -46,7 +46,7 @@ function ssh_key_fps_and_fns {
 
 function set_color_prompt {
     RC=$?;
-    DATE="\033[1;36m`date` \033[0m||"
+    DATE="\033[1;36m`date "+%s"` \033[0m||"
     USERHOSTBRANCH='\033[1;34m`hostname`\033[0m \033[1;34m`whoami`\033[0m \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
@@ -68,3 +68,6 @@ alias grep="grep --color"
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
     exec startx
 fi
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export VISUAL="vim"
