@@ -1,6 +1,10 @@
 call plug#begin(stdpath('data') . '/plugged')
     Plug 'rust-lang/rust.vim'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
+autocmd BufWritePre *.rs :RustFmt
+
+"let g:deoplete#enable_at_startup = 1
 
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
@@ -18,5 +22,3 @@ set noswapfile
 set autochdir
 
 syntax on
-
-let g:rustfmt_autosave = 1
