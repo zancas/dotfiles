@@ -1,3 +1,12 @@
+# nix
+if [ -e /home/mherder/.nix-profile/etc/profile.d/nix.sh ]; then
+    . /home/mherder/.nix-profile/etc/profile.d/nix.sh;
+fi
+
+#herbstluftwm
+source ~/src/herbstluftwm/share/herbstclient-completion.bash
+alias hc=herbstclient
+
 if [ -n "$TMUX" ] && [ -n "$SESSION_LINK" ];
     then
     export SSH_AUTH_SOCK=$SESSION_LINK
@@ -14,7 +23,7 @@ fi
 umask 002
 shopt -s checkwinsize
 function GITBRANCH {
-    if [[ `git branch 2>&1` == *"Not a git repository"* ]]
+    if [[ `git branch 2>&1` == *"ot a git repository"* ]]
     then
 	    echo No git repo
     else
@@ -47,7 +56,7 @@ function ssh_key_fps_and_fns {
 function set_color_prompt {
     RC=$?;
     DATE="\033[1;36m`date "+%s"` \033[0m||"
-    USERHOSTBRANCH='\033[1;34m`hostname`\033[0m \033[1;34m`whoami`\033[0m \033[1;35m$(GITBRANCH)\033[0m'
+    USERHOSTBRANCH='\033[1;34m`cat /etc/hostname`\033[0m \033[1;34m`whoami`\033[0m \033[1;35m$(GITBRANCH)\033[0m'
     if [  ${RC} -eq 0 ]
     then
         PWDRC='\033[1;32m${PWD}\033[0m\033[1;31m: ${RC} \033[0m$'
@@ -65,9 +74,9 @@ export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
 #source ~/.containenv/.loginrc
 
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    exec startx
-fi
-
-export PATH="$HOME/.cargo/bin:$PATH"
 export VISUAL="vim"
+
+if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 6 ]; then
+    startx
+fi
+. ~/dotfiles/git-completion.bash
