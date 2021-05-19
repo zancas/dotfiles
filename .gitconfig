@@ -1,15 +1,15 @@
 [user]
-	name = zancas
-	email = zancas@zingolabs.org
+    name = zancas
+    email = zancas@zingolabs.org
     signingkey = 6DB04B434E55B7BF
 [alias]
-	lol = log --graph --decorate --oneline --color
+    lol = log --graph --decorate --oneline --color
 [commit]
     gpgSign = true
-	template = ~/dotfiles/.git-commit-template.txt
+    template = ~/dotfiles/.git-commit-template.txt
 [core]
-	excludefile = /root/.gitignore
+    excludefile = /root/.gitignore
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [gpg]
     program = gpg2
