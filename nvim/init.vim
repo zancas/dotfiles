@@ -28,7 +28,7 @@ set shiftwidth=4
 set expandtab
 set laststatus=2
 set number
-"set relativenumber
+set relativenumber
 set wildmode=longest,list,full
 set wildmenu
 highlight ModStatus ctermbg=White ctermfg=Red
