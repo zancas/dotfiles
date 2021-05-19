@@ -9,14 +9,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'https://github.com/rhysd/vim-clang-format.git'
     Plug 'Shougo/unite.vim'
     Plug 'devjoe/vim-codequery'
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
 autocmd BufWritePre *.rs :RustFmt
 autocmd BufWritePre *.c :ClangFormat
 autocmd BufWritePre *.h :ClangFormat
 autocmd BufWritePre *.cpp :ClangFormat
 
-let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_at_startup = 1
 
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
