@@ -20,6 +20,7 @@ autocmd BufWritePre *.cpp :ClangFormat
 
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
+nnoremap <M-g> :!/home/mherder/dotfiles/nvim/make_ctags.sh<CR>
 
 "set colorcolumn=80
 set tabstop=4
@@ -34,5 +35,4 @@ highlight ModStatus ctermbg=White ctermfg=Red
 set statusline=%F:%#ModStatus#%m%#StatusLine#:{%p%%,%l,%c}
 set noswapfile
 set autochdir
-
 syntax on
