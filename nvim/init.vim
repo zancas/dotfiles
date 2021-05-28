@@ -4,6 +4,7 @@ let &packpath = &runtimepath
 syntax enable
 filetype plugin indent on
 call plug#begin(stdpath('data') . '/plugged')
+    Plug 'https://github.com/junegunn/vader.vim', { 'do': ':UpdateRemotePlugins' }
     Plug 'https://github.com/sheerun/vim-polyglot.git'
     Plug 'https://github.com/rust-lang/rust.vim'
     Plug 'https://github.com/rhysd/vim-clang-format.git'
@@ -11,7 +12,14 @@ call plug#begin(stdpath('data') . '/plugged')
     Plug 'devjoe/vim-codequery'
     "Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 call plug#end()
-autocmd BufWritePre *.rs :RustFmt
+function RustFormat()
+    execute "normal! i "
+    execute "normal! a\<BS>"
+    RustFmt
+endfunction
+
+autocmd BufWritePre *.rs :call RustFormat()
+
 autocmd BufWritePre *.c :ClangFormat
 autocmd BufWritePre *.h :ClangFormat
 autocmd BufWritePre *.cpp :ClangFormat
@@ -21,14 +29,16 @@ autocmd BufWritePre *.cpp :ClangFormat
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprevious<CR>
 nnoremap <M-g> :!/home/mherder/dotfiles/nvim/make_ctags.sh<CR>
+nnoremap <C-]> g<C-]>
 
-"set colorcolumn=80
+autocmd FileType * set colorcolumn=
+autocmd FileType rust set colorcolumn=81
 set tabstop=4
 set shiftwidth=4
 set expandtab
 set laststatus=2
 set number
-set relativenumber
+"set relativenumber
 set wildmode=longest,list,full
 set wildmenu
 highlight ModStatus ctermbg=White ctermfg=Red
@@ -36,3 +46,6 @@ set statusline=%F:%#ModStatus#%m%#StatusLine#:{%p%%,%l,%c}
 set noswapfile
 set autochdir
 syntax on
+
+hi MatchParen ctermbg=red
+set cursorline
