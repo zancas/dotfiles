@@ -33,6 +33,7 @@ nnoremap <C-]> g<C-]>
 
 autocmd FileType * set colorcolumn=
 autocmd FileType rust set colorcolumn=81
+autocmd FileType python set colorcolumn=81
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -49,3 +50,5 @@ syntax on
 
 hi MatchParen ctermbg=red
 set cursorline
+autocmd InsertEnter * set nocursorline
+autocmd InsertLeave * set cursorline
