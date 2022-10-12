@@ -1,16 +1,3 @@
-# nix
-if [ -e /home/mherder/.nix-profile/etc/profile.d/nix.sh ]; then
-    . /home/mherder/.nix-profile/etc/profile.d/nix.sh;
-fi
-
-#herbstluftwm
-source ~/src/herbstluftwm/share/herbstclient-completion.bash
-alias hc=herbstclient
-
-if [ -n "$TMUX" ] && [ -n "$SESSION_LINK" ];
-    then
-    export SSH_AUTH_SOCK=$SESSION_LINK
-fi
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 
@@ -73,10 +60,12 @@ export PROMPT_COMMAND=set_color_prompt
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
 #source ~/.containenv/.loginrc
-
-export VISUAL="vim"
+export PATH=${HOME}/.cargo/bin:${HOME}/.local/bin:$PATH
+export VISUAL="hx"
+export GPG_TTY=$(tty)
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 6 ]; then
     startx
 fi
 . ~/dotfiles/git-completion.bash
+. "$HOME/.cargo/env"
