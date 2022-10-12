@@ -6,10 +6,12 @@
 	lol = log --graph --decorate --oneline --color
 [commit]
     gpgSign = true
-	template = ~/dotfiles/.git-commit-template.txt
 [core]
+    editor = hx
 	excludefile = /root/.gitignore
 [init]
 	defaultBranch = main
 [gpg]
     program = gpg2
+[merge]
+	conflictStyle = diff3
