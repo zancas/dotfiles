@@ -37,13 +37,11 @@ function set_color_prompt {
     fi
     LINE0=$DATE' '$USERHOSTBRANCH'\n'
     LINE2=$PWDRC'\n'
-    PS1=$LINE0$LINE2 #$LINE2
+    PS1=$LINE0$LINE2
 }
 export PROMPT_COMMAND=set_color_prompt
-
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
-#source ~/.containenv/.loginrc
 export PATH=${HOME}/.cargo/bin:${HOME}/.local/bin:$PATH
 export VISUAL="hx"
 export GPG_TTY=$(tty)
