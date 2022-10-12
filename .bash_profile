@@ -25,21 +25,6 @@ function GITBRANCH {
     unset -f
     fi
 }
-function ssh_key_fps_and_fns {
-    if [[ `ssh-add 2>&1` == *"Could not open a connection"* ]]
-    then
-        echo No ssh-agent
-    else
-        KEYFNAMES=''
-        for FNAME in `ssh-add -l | cut -d ' ' -f 3`;
-        do
-            KEYFNAMES=$KEYFNAMES' '${FNAME##*/}
-        done
-        echo $KEYFNAMES
-    fi
-}
-
-
 function set_color_prompt {
     RC=$?;
     DATE="\033[1;36m`date "+%s"` \033[0m||"
@@ -51,7 +36,6 @@ function set_color_prompt {
         PWDRC='\033[1;31m${PWD}\033[0m RC\033[1;32m: ${RC} \033[0m$'
     fi
     LINE0=$DATE' '$USERHOSTBRANCH'\n'
-    #LINE1=$(ssh_key_fps_and_fns)'\n'
     LINE2=$PWDRC'\n'
     PS1=$LINE0$LINE2 #$LINE2
 }
