@@ -2,6 +2,7 @@ theme = "dracula"
 
 [editor]
 auto-pairs = false # defaults to `true`
+mouse = false
 
 [keys.normal]
 g = { o = "jump_backward" }
