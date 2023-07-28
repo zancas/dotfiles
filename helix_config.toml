@@ -1,0 +1,11 @@
+theme = "dracula"
+
+[editor]
+auto-pairs = false # defaults to `true`
+
+[keys.normal]
+g = { o = "jump_backward" }
+L = ":toggle lsp.display-inlay-hints"
+
+[editor.soft-wrap]
+enable = true
