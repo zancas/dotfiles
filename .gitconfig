@@ -1,7 +1,7 @@
 [user]
 	name = zancas
 	email = zancas@zingolabs.org
-    signingkey = 6DB04B434E55B7BF
+	signingkey = E4BCAA0A9B09F559
 [alias]
 	lol = log --graph --decorate --oneline --color
 [commit]
