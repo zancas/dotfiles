@@ -42,12 +42,20 @@ function set_color_prompt {
 export PROMPT_COMMAND=set_color_prompt
 export PYTHONDONTWRITEBYTECODE=1
 alias grep="grep --color"
-export PATH=${HOME}/.cargo/bin:${HOME}/.local/bin:$PATH
+if [[ ":$PATH:" != *":$HOME/.cargo/bin:"* ]]; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 export VISUAL="hx"
 export GPG_TTY=$(tty)
 
 if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 6 ]; then
     startx
 fi
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "/usr/share/nvm/init-nvm.sh" ] && \. "/usr/share/nvm/init-nvm.sh"
+
 . ~/dotfiles/git-completion.bash
 . "$HOME/.cargo/env"
