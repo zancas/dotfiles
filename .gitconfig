@@ -4,6 +4,7 @@
 	signingkey = E4BCAA0A9B09F559
 [alias]
 	lol = log --graph --decorate --oneline --color
+	lop = log --patch --graph --decorate --oneline --color
 [commit]
     gpgSign = true
 [core]
@@ -15,3 +16,5 @@
     program = gpg2
 [merge]
 	conflictStyle = diff3
+[pull]
+	ff = only

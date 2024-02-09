@@ -55,7 +55,9 @@ if [ -z "$DISPLAY" ] && [ "$XDG_VTNR" -eq 6 ]; then
     startx
 fi
 export NVM_DIR="$HOME/.config/nvm"
-[ -s "/usr/share/nvm/init-nvm.sh" ] && \. "/usr/share/nvm/init-nvm.sh"
 
 . ~/dotfiles/git-completion.bash
 . "$HOME/.cargo/env"
+export ANDROID_SDK_ROOT=${HOME}/Android/Sdk
+export JAVA_HOME=${HOME}/java_home/jdk-18.0.2
+export PATH=$PATH:${ANDROID_SDK_ROOT}/tools:${ANDROID_SDK_ROOT}/platform-tools:${ANDROID_SDK_ROOT}/cmdline-tools/latest/bin:${JAVA_HOME}/bin
