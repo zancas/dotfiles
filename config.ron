@@ -70,8 +70,7 @@
     sloppy_mouse_follows_focus: true,
     auto_derive_workspaces: true,
     keybind: [
-
-        (command: Execute, value: "/bin/bash ~/dotfiles/polybar_launcher.sh", modifier: ["modkey"], key: "."),
+        (command: Execute, value: "/home/nattyb/dotfiles/polybar_launcher.sh", modifier: ["modkey", "Shift"], key: "m"),
         (command: Execute, value: "dmenu_run", modifier: ["modkey"], key: "p"),
         (command: Execute, value: "alacritty", modifier: ["modkey", "Shift"], key: "Return"),
         (command: CloseWindow, value: "", modifier: ["modkey", "Shift"], key: "q"),
